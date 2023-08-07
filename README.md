@@ -28,7 +28,7 @@ The AWS infrastructure is provisioned using Terraform, and configuration managem
 
 - Clone repository:
 ```
-git clone https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible.git
+git clone https://github.com/eslamkhaled560/complete-cicd-python-deployment-eks.git
 ```
 
 - Customize Terraform and Ansible variables by replacing them with your preferred values.            
@@ -40,7 +40,7 @@ git clone https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ans
 
 - The [IaaC/iaac-automation.sh](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/IaaC/iaac-automation.sh) script orchestrates the entire AWS infrastructure setup and Jenkins instance configuration processes without requiring any manual intervention.
 ```
-cd deploy-app-eks-jenkins-terraform-ansible/IaaC
+cd complete-cicd-python-deployment-eks/IaaC
 sudo chmod 400 iaac-automation.sh
 ./iaac-automation.sh                                  
 ```
@@ -111,12 +111,12 @@ File Related: [Jenkinsfile](https://github.com/eslamkhaled560/deploy-app-eks-jen
 - Delete Kubernetes resources, as Terraform will struggle to delete some resources that depend on the Nginx Ingress LoadBalancer.
 ```
 aws eks update-kubeconfig --name ${CLUSTER_NAME}
-kubectl delete -f path-to-cloned-repo/k8s
+kubectl delete -f ../k8s
 ```
 
 - Destroy all AWS resourses
 ```
-cd path-to-cloned-repo/IaaC
+cd path-to-repo/IaaC
 terraform destroy                              # you need to type 'yes' when prompt or use '--auto-approve' flag
 ```
 
