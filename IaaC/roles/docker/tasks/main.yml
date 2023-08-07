@@ -1,0 +1,35 @@
+---
+    - name: install docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Add the docker group
+      group:
+        name: docker
+        state: present
+
+    - name: add current user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+      when: ansible_user != 'root'
+
+    - name: add jenkins user to docker group    # You should install Jenkins first
+      user:
+        name: jenkins
+        groups: docker
+        append: yes
+      when: ansible_user != 'root'
+
+    - name: restart jenkins
+      service:
+        name: jenkins
+        state: restarted
+
+    - name: start docker
+      service:
+        name: docker
+        state: started

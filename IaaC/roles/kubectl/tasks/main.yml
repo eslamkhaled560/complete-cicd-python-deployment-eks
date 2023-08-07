@@ -1,0 +1,22 @@
+---
+    - name: Install ca-certificates and curl
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - apt-transport-https
+        state: present
+
+    - name: Download kubectl
+      shell: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+    - name: Set kubectl permissions and install
+      command: sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      args:
+        executable: /bin/bash
+
+    - name: Clean up downloaded kubectl binary
+      file:
+        path: kubectl
+        state: absent

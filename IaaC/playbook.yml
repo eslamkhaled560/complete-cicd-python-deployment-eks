@@ -1,0 +1,9 @@
+- name: Install and Configure Jenkins, Docker, Terraform, Ansible, Kubectl and AWS CLI
+  hosts: jenkins
+  become: yes
+
+  roles:
+    - jenkins       # You must install jenkins first, because docker depends on it
+    - docker
+    - kubectl
+    - awscli

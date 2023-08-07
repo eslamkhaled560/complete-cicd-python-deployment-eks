@@ -1,0 +1,16 @@
+---
+    - name: Install zip, unzip and gettext-base
+      apt:
+        name:
+          - unzip
+          - zip
+          - gettext-base
+
+    - name: Download AWS CLI zip package
+      command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+    - name: Unzip AWS CLI zip package
+      command: unzip awscliv2.zip
+
+    - name: Install AWS CLI zip package
+      command: sudo ./aws/install

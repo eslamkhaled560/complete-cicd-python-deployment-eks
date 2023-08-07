@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  flask_app:
+    build:
+      context: ./FlaskApp
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: BucketList
+      MYSQL_HOST: mysql
+    depends_on:
+      - mysql
+
+  mysql:
+    build:
+      context: ./MySQL_Queries
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+

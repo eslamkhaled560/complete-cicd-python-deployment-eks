@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${INGRESS_NAME}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+#    nginx.ingress.kubernetes.io/ssl-redirect: "false"     this configuration did not work properly
+#    nginx.ingress.kubernetes.io/use-regex: "true"            i'm keeping it just to remember
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    networking.k8s.io/ingress.class: nginx
+#    kubernetes.io/ingress.class: 'nginx'
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: python-svc
+            port:
+              number: 80

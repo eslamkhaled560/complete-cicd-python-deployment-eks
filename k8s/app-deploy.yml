@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-deployment
+  labels:
+    app: python
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+      - name: python
+        image: ${ECR_URL}/${PYTHON_REPO}:${BUILD_NUMBER}
+        env:
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: username
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: password
+          - name: MYSQL_DB
+            valueFrom:
+              configMapKeyRef:
+                name: db-conf
+                key: name
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: db-conf
+                key: host
+        ports:
+        - containerPort: 5002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-svc
+  labels:
+    app: python-svc
+spec:
+  selector:
+    app: python
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 5002
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-credentials
+data:
+ username: cm9vdA==
+ password: cm9vdA==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-conf
+data:
+ host: mysql
+ name: BucketList

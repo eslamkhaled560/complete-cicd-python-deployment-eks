@@ -1,0 +1,44 @@
+---
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    - name: Upgrade packages
+      apt:
+        upgrade: dist
+
+    - name: Add Jenkins repository key
+      shell: |
+        curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+    - name: Add Jenkins repository to sources list
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+        state: present
+        filename: jenkins.list
+
+    - name: install open-jdk 17
+      apt:
+        name: openjdk-17-jdk
+        state: present
+        update_cache: yes
+
+    - name: install jenkins and git
+      apt:
+        name:
+          - jenkins
+          - git
+        state: present
+        update_cache: yes
+
+    - name: start jenkins
+      service:
+        name: jenkins
+        state: started
+
+    # Replace "jenkins_admin_pass_dest" with your values in the vars directory
+    - name: get jenkins initialAdminPassword
+      fetch:
+        src: /var/lib/jenkins/secrets/initialAdminPassword
+        dest: "{{ jenkins_admin_pass_dest }}"
+        flat: yes
+        become: yes
