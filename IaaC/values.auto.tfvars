@@ -1,4 +1,7 @@
+#########################################################
 ### Customize your variables by changing these values ###
+#########################################################
+
 aws_region = "us-east-1"
 
 # Jenkins VPC
