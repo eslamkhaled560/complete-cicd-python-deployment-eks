@@ -1,4 +1,4 @@
-# Deploy Flask-MySQL App on AWS EKS Using Jenkins - Sprints Capstone Project
+# Deploy Flask-MySQL App on AWS EKS Using Jenkins - IaC Automation with Terraform and Ansible
 
 ## Description
 
