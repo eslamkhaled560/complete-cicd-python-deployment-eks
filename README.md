@@ -35,7 +35,7 @@ git clone https://github.com/eslamkhaled560/complete-cicd-python-deployment-eks.
   Terraform Values File: [IaaC/values.auto.tfvars](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/IaaC/values.auto.tfvars)         
   Ansible Values File: [IaaC/roles/jenkins/vars/main.yml](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/IaaC/roles/jenkins/vars/main.yml)
 
-- Personalize the ```inventory.txt``` file by setting the appropriate user and private key path.
+- Personalize the ```inventory.txt``` file by setting the appropriate user and private key path.                
   Inventory File: [IaaC/inventory.txt](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/IaaC/inventory.txt)
 
 - The [IaaC/iaac-automation.sh](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/IaaC/iaac-automation.sh) script orchestrates the entire AWS infrastructure setup and Jenkins instance configuration processes without requiring any manual intervention.
@@ -64,7 +64,7 @@ Go to ```Manage Jenkins > Credentials``` and add the following credentials:
 - __github:__ user and password (github access token)
 - __aws_access_key_id:__ Secret text
 - __aws_secret_access_key:__ Secret text
-- __ecr:__ User name and Password (get the password from the terminal ```aws ecr get-login-password --region ${REGION}```)         
+- __ecr:__ User name and Password (get the password from the terminal ```aws ecr get-login-password --region ${REGION}```.         
 >  You can utilize your personalized IDs, but please remember to update them in the Jenkinsfile accordingly.           
 
 ![13- jenkins-credentials](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/assets/54172897/63435989-e6c4-4317-8509-71c7d417b76d)
@@ -85,11 +85,11 @@ http://jenkins-public-ip:8080/github-webhook/
 
 ![12- webhook](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/assets/54172897/5c46516f-6667-4a12-9251-bae1692b6beb)
 
-- Ensure that all environment variables and credential names in the Jenkinsfile are personalized with your specific values.                               
-File Related: [Jenkinsfile](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/Jenkinsfile)
-
 ------------------------------------------------
 ### Build Pipeline & View Output
+
+- Ensure that all environment variables and credential names in the Jenkinsfile are personalized with your specific values.                               
+File Related: [Jenkinsfile](https://github.com/eslamkhaled560/deploy-app-eks-jenkins-terraform-ansible/blob/main/Jenkinsfile)
 
 - Build Pipeline (It can be built automatically upon any push)
   
