@@ -106,7 +106,7 @@ File Related: [Jenkinsfile](https://github.com/eslamkhaled560/deploy-app-eks-jen
 ------------------------------------------------
 ## Clean Up Resources
 
-- Delete the ERC images on AWS, as Terraform won't be able to destroy them if the repository is not empty.
+- Delete the ECR images on AWS, as Terraform won't be able to destroy them if the repository is not empty.
 
 - Delete Kubernetes resources, as Terraform will struggle to delete some resources that depend on the Nginx Ingress LoadBalancer.
 ```
